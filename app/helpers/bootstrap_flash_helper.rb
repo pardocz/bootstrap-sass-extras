@@ -10,7 +10,7 @@ module BootstrapFlashHelper
   def bootstrap_flash(additional_accepted_types={})
     safe_join(flash.each_with_object([]) do |(type, message), messages|
                 next if message.blank? || !message.respond_to?(:to_str)
-                type = ALERT_TYPES_MAP.merge(additional_accepted_types).fetch(type.to_sym, type)
+                type = ALERT_TYPES_MAP.merge(additional_accepted_types).fetch(type.to_sym, nil)
                 if type
                   messages << flash_container(type, message)
                 end
